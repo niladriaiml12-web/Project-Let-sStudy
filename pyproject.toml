@@ -1,0 +1,51 @@
+[project]
+name = "lets-study"
+version = "0.1.0"
+description = "Multi-Tenant Study RAG Platform for Engineering Students"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    # Web framework
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.30.0",
+    "python-multipart>=0.0.9",      # multipart file uploads
+    # AI / LLM
+    "google-generativeai>=0.8.0",   # Gemini LLM + Vision OCR + embeddings
+    "langchain>=0.3.0",
+    "langchain-google-genai>=2.0.0",
+    "langchain-community>=0.3.0",
+    # Vector DB
+    "chromadb>=0.5.0",
+    # Relational DB (async)
+    "sqlalchemy[asyncio]>=2.0.0",
+    "aiosqlite>=0.20.0",            # Dev: SQLite async driver
+    # "asyncpg>=0.30.0",            # Prod: uncomment for PostgreSQL
+    # Config & validation
+    "pydantic>=2.0.0",
+    "pydantic-settings>=2.0.0",
+    "python-dotenv>=1.0.0",
+    # Utilities
+    "pillow>=10.0.0",               # Image handling before OCR
+    "httpx>=0.27.0",                # Async HTTP client
+    "tenacity>=8.2.0",              # Retry logic for LLM calls
+    "structlog>=24.0.0",            # Structured logging
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.24.0",
+    "httpx>=0.27.0",                # TestClient
+    "pytest-cov>=5.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]

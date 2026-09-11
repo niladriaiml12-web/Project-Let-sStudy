@@ -1,0 +1,103 @@
+@import "tailwindcss";
+
+@theme {
+  --color-surface-0: #0d0d0d;
+  --color-surface-1: #171717;
+  --color-surface-2: #1f1f1f;
+  --color-surface-3: #262626;
+  --color-border: #2a2a2a;
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #a0a0a0;
+  --color-text-muted: #5a5a5a;
+  --color-accent-blue: #3D46E8;
+  --color-accent-purple: #B18CFF;
+  --color-accent-pink: #FFD6E7;
+  --color-accent-glow: #5D68FF;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-sans);
+  background: var(--color-surface-0);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scrollbar — thin, dark */
+::-webkit-scrollbar { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #444; }
+
+/* Highlight.js override — transparent bg to inherit panel color */
+.hljs { background: transparent !important; }
+
+/* KaTeX block display */
+.katex-display { overflow-x: auto; padding: 0.5rem 0; }
+
+/* Prose overrides for dark markdown */
+.prose {
+  color: var(--color-text-primary);
+  max-width: none;
+}
+.prose h1, .prose h2, .prose h3 { color: var(--color-text-primary); }
+.prose strong { color: var(--color-accent-purple); font-weight: 600; }
+.prose code {
+  font-family: var(--font-mono);
+  background: #1a1a2e;
+  color: var(--color-accent-purple);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+.prose pre { background: #0f0f1a !important; border: 1px solid var(--color-border); border-radius: 8px; }
+.prose pre code { background: transparent; color: inherit; padding: 0; }
+.prose blockquote { border-left-color: var(--color-accent-blue); color: var(--color-text-secondary); }
+.prose a { color: var(--color-accent-purple); }
+.prose hr { border-color: var(--color-border); }
+.prose table { border-color: var(--color-border); }
+.prose th { background: var(--color-surface-2); color: var(--color-text-primary); }
+.prose td { border-color: var(--color-border); }
+
+/* Animated status step */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+.animate-pulse-dot { animation: pulse-dot 1.2s ease-in-out infinite; }
+
+/* Slide-up entry for messages */
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slide-up 0.25s ease-out forwards; }
+
+/* Shimmer for loading state */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.animate-shimmer {
+  background: linear-gradient(90deg, #1f1f1f 25%, #2a2a2a 50%, #1f1f1f 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Typing dots */
+@keyframes typing {
+  0%, 60%, 100% { transform: translateY(0); }
+  30% { transform: translateY(-6px); }
+}
+.typing-dot:nth-child(1) { animation: typing 1.2s ease-in-out infinite; }
+.typing-dot:nth-child(2) { animation: typing 1.2s ease-in-out 0.2s infinite; }
+.typing-dot:nth-child(3) { animation: typing 1.2s ease-in-out 0.4s infinite; }
